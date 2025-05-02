@@ -17,6 +17,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // 1) Crear ADMIN si no existe
         if (!userRepo.existsByUsername("admin")) {
             UserEntity admin = UserEntity.builder()
                 .username("admin")
@@ -25,13 +26,16 @@ public class DataLoader implements CommandLineRunner {
             admin.getRoles().add(Role.ROLE_USER);
             admin.getRoles().add(Role.ROLE_ADMIN);
             userRepo.save(admin);
+        }
+
+        // 2) Crear DIEGO si no existe
+        if (!userRepo.existsByUsername("diego")) {
             UserEntity user = UserEntity.builder()
-                    .username("admin")
-                    .password(encoder.encode("Secreto123"))
-                    .build();
-                admin.getRoles().add(Role.ROLE_USER);
-                userRepo.save(user);
+                .username("diego")                          // ← aquí debe ir "diego"
+                .password(encoder.encode("Secreto123"))
+                .build();
+            user.getRoles().add(Role.ROLE_USER);           // ← roles sobre 'user', no 'admin'
+            userRepo.save(user);
         }
     }
 }
-
