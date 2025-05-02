@@ -1,0 +1,31 @@
+# src/main/resources/application.yaml
+
+server:
+  port: 8081
+
+spring:
+   datasource:
+    url: jdbc:postgresql://localhost:5432/Prueba
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+   jpa:
+    hibernate:
+      ddl-auto: update          # none, validate, update, create, create-drop
+    show-sql: true              # imprime SQL en consola
+    properties:
+      hibernate:
+        format_sql: true        # formatea el SQL para mejor lectura
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+    datasource:
+    hikari:
+      maximum-pool-size: 10     # tamaño máximo del pool
+      idle-timeout: 600000      # inactividad antes de cerrar la conexión
+
+# Propiedades de JWT que lee tu JwtTokenProvider
+app:
+  jwt:
+    secret: MiClaveSuperSecretaDeAlMenos32Chars
+    validity: 3600000          # duración en milisegundos (1h)
