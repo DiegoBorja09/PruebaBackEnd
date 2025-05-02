@@ -25,15 +25,12 @@ public class DataLoader implements CommandLineRunner {
             admin.getRoles().add(Role.ROLE_USER);
             admin.getRoles().add(Role.ROLE_ADMIN);
             userRepo.save(admin);
-        }
-        if (!userRepo.existsByUsername("diego")) {
-            UserEntity admin = UserEntity.builder()
-                .username("admin")
-                .password(encoder.encode("123456"))
-                .build();
-            admin.getRoles().add(Role.ROLE_USER);
-            admin.getRoles().add(Role.ROLE_ADMIN);
-            userRepo.save(admin);
+            UserEntity user = UserEntity.builder()
+                    .username("admin")
+                    .password(encoder.encode("Secreto123"))
+                    .build();
+                admin.getRoles().add(Role.ROLE_USER);
+                userRepo.save(user);
         }
     }
 }
